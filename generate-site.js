@@ -14,9 +14,9 @@ const products = [
     category: "Clothing",
     price: 35,
     images: [
-      "/images/crown-1.jpeg",
-      "/images/crown-2.jpeg",
-      "/images/crown-3.jpeg",
+      "images/crown-1.jpeg",
+      "images/crown-2.jpeg",
+      "images/crown-3.jpeg",
     ],
   },
   {
@@ -26,7 +26,7 @@ const products = [
       "Organic cotton pants with adjustable cuffs. Designed to grow with your child, featuring a comfortable elastic waistband.",
     category: "Clothing",
     price: 30,
-    images: ["/images/pants-1.jpeg", "/images/pants-2.jpeg"],
+    images: ["images/pants-1.jpeg", "images/pants-2.jpeg"],
   },
   {
     id: 3,
@@ -36,10 +36,10 @@ const products = [
     category: "Toys",
     price: 65,
     images: [
-      "/images/doll-1.jpeg",
-      "/images/doll-2.jpeg",
-      "/images/doll-3.jpeg",
-      "/images/doll-4.jpeg",
+      "images/doll-1.jpeg",
+      "images/doll-2.jpeg",
+      "images/doll-3.jpeg",
+      "images/doll-4.jpeg",
     ],
   },
   {
@@ -49,7 +49,7 @@ const products = [
       "Soft sleep pouch for dolls, made from organic cotton. Features a carrying strap and a cozy interior.",
     category: "Toys",
     price: 20,
-    images: ["/images/pouch-1.jpeg", "/images/pouch-2.jpeg"],
+    images: ["images/pouch-1.jpeg", "images/pouch-2.jpeg"],
   },
   {
     id: 5,
@@ -59,9 +59,9 @@ const products = [
     category: "Toys",
     price: 100,
     images: [
-      "/images/wings-1.jpeg",
-      "/images/wings-2.jpeg",
-      "/images/wings-3.jpeg",
+      "images/wings-1.jpeg",
+      "images/wings-2.jpeg",
+      "images/wings-3.jpeg",
     ],
   },
   {
@@ -72,9 +72,9 @@ const products = [
     category: "Home",
     price: 30,
     images: [
-      "/images/bunting-1.jpeg",
-      "/images/bunting-2.jpeg",
-      "/images/bunting-3.jpeg",
+      "images/bunting-1.jpeg",
+      "images/bunting-2.jpeg",
+      "images/bunting-3.jpeg",
     ],
   },
 ];
