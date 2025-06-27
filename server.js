@@ -16,6 +16,7 @@ const server = http.createServer((req, res) => {
         case '.json': contentType = 'application/json'; break;
         case '.png': contentType = 'image/png'; break;
         case '.jpg': contentType = 'image/jpg'; break;
+        case '.jpeg': contentType = 'image/jpeg'; break;
     }
 
     fs.readFile(__dirname + filePath, (err, content) => {

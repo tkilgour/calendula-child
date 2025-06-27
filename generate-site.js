@@ -13,7 +13,11 @@ const products = [
       "Handmade crown in soft cotton with quilted details. Features adjustable snaps for a perfect fit.",
     category: "Clothing",
     price: 35,
-    image: "/images/crown.jpeg",
+    images: [
+      "/images/crown-1.jpeg",
+      "/images/crown-2.jpeg",
+      "/images/crown-3.jpeg",
+    ],
   },
   {
     id: 2,
@@ -22,7 +26,7 @@ const products = [
       "Organic cotton pants with adjustable cuffs. Designed to grow with your child, featuring a comfortable elastic waistband.",
     category: "Clothing",
     price: 30,
-    image: "/images/pants.jpeg",
+    images: ["/images/pants-1.jpeg", "/images/pants-2.jpeg"],
   },
   {
     id: 3,
@@ -31,7 +35,12 @@ const products = [
       "Handmade dolls crafted from natural fibers. Each doll is unique, with hand-stitched details and soft, safe materials.",
     category: "Toys",
     price: 65,
-    image: "/images/doll.jpeg",
+    images: [
+      "/images/doll-1.jpeg",
+      "/images/doll-2.jpeg",
+      "/images/doll-3.jpeg",
+      "/images/doll-4.jpeg",
+    ],
   },
   {
     id: 4,
@@ -40,7 +49,7 @@ const products = [
       "Soft sleep pouch for dolls, made from organic cotton. Features a carrying strap and a cozy interior.",
     category: "Toys",
     price: 20,
-    image: "/images/pouch.jpeg",
+    images: ["/images/pouch-1.jpeg", "/images/pouch-2.jpeg"],
   },
   {
     id: 5,
@@ -49,7 +58,11 @@ const products = [
       "Quilted wings for imaginative play, made from soft cotton. Features adjustable straps and a lightweight design.",
     category: "Toys",
     price: 100,
-    image: "/images/wings.jpeg",
+    images: [
+      "/images/wings-1.jpeg",
+      "/images/wings-2.jpeg",
+      "/images/wings-3.jpeg",
+    ],
   },
   {
     id: 6,
@@ -58,7 +71,11 @@ const products = [
       "Handmade bunting made from natural cotton fabrics. Perfect for parties or room decor, featuring a mix of colors and patterns.",
     category: "Home",
     price: 30,
-    image: "/images/bunting.jpeg",
+    images: [
+      "/images/bunting-1.jpeg",
+      "/images/bunting-2.jpeg",
+      "/images/bunting-3.jpeg",
+    ],
   },
 ];
 
@@ -194,16 +211,96 @@ const htmlTemplate = `<!DOCTYPE html>
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .product-image {
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
             width: 100%;
             height: 280px;
-            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #999;
             font-size: 14px;
-            position: relative;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #2c2c2c;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .carousel-nav.prev {
+            left: 12px;
+        }
+
+        .carousel-nav.next {
+            right: 12px;
+        }
+
+        .carousel-container:hover .carousel-nav {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+        }
+
+        /* Hide navigation for single images */
+        .carousel-container[data-count="1"] .carousel-nav,
+        .carousel-container[data-count="1"] .carousel-indicators {
+            display: none;
         }
 
         .product-info {
@@ -365,25 +462,142 @@ const htmlTemplate = `<!DOCTYPE html>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Initialize all carousels
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousels = document.querySelectorAll('.carousel-container');
+            
+            carousels.forEach(carousel => {
+                const track = carousel.querySelector('.carousel-track');
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                const prevBtn = carousel.querySelector('.carousel-nav.prev');
+                const nextBtn = carousel.querySelector('.carousel-nav.next');
+                const dots = carousel.querySelectorAll('.carousel-dot');
+                
+                let currentIndex = 0;
+                
+                function updateCarousel() {
+                    const translateX = -currentIndex * 100;
+                    track.style.transform = \`translateX(\${translateX}%)\`;
+                    
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                }
+                
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                }
+                
+                // Event listeners
+                if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+                if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+                
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
+                });
+                
+                // Touch/swipe support
+                let startX = 0;
+                let isDragging = false;
+                
+                carousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+                
+                carousel.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                });
+                
+                carousel.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            nextSlide();
+                        } else {
+                            prevSlide();
+                        }
+                    }
+                    
+                    isDragging = false;
+                });
+                
+                // Initialize
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>`;
 
-// Generate product HTML
+// Generate product HTML with carousel
 function generateProductsHTML(products) {
   return products
-    .map(
-      (product) => `
+    .map((product) => {
+      const carouselSlides = product.images
+        .map(
+          (image) => `
+                        <div class="carousel-slide" style="background-image: url('${image}');">
+                        </div>`
+        )
+        .join("");
+
+      const carouselDots = product.images
+        .map(
+          (_, index) => `
+                        <div class="carousel-dot ${
+                          index === 0 ? "active" : ""
+                        }"></div>`
+        )
+        .join("");
+
+      return `
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('${product.image}'); background-size: cover; background-position: center;">
+                    <div class="carousel-container" data-count="${
+                      product.images.length
+                    }">
+                        <div class="carousel-track">
+                            ${carouselSlides}
+                        </div>
+                        ${
+                          product.images.length > 1
+                            ? `
+                        <button class="carousel-nav prev">‹</button>
+                        <button class="carousel-nav next">›</button>
+                        <div class="carousel-indicators">
+                            ${carouselDots}
+                        </div>
+                        `
+                            : ""
+                        }
                     </div>
                     <div class="product-info">
                         <div class="product-category">${product.category}</div>
                         <h3 class="product-name">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
+                        <p class="product-description">${
+                          product.description
+                        }</p>
                         <div class="product-price">$${product.price}</div>
                     </div>
-                </div>`
-    )
+                </div>`;
+    })
     .join("");
 }
 
@@ -417,6 +631,7 @@ const server = http.createServer((req, res) => {
         case '.json': contentType = 'application/json'; break;
         case '.png': contentType = 'image/png'; break;
         case '.jpg': contentType = 'image/jpg'; break;
+        case '.jpeg': contentType = 'image/jpeg'; break;
     }
 
     fs.readFile(__dirname + filePath, (err, content) => {
