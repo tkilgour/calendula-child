@@ -21,12 +21,12 @@ const products = [
   },
   {
     id: 2,
-    name: "Grow-with-me Pants",
+    name: "Grow-with-me Pantsn (6m-2y)",
     description:
       "Organic cotton pants with adjustable cuffs. Designed to grow with your child, featuring a comfortable elastic waistband.",
     category: "Clothing",
     price: 30,
-    images: ["images/pants-1.jpeg", "images/pants-2.jpeg"],
+    images: ["images/pants-1.jpeg"],
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ const products = [
       "Soft sleep pouch for dolls, made from organic cotton. Features a carrying strap and a cozy interior.",
     category: "Toys",
     price: 20,
-    images: ["images/pouch-1.jpeg", "images/pouch-2.jpeg"],
+    images: ["images/pouch-1.jpeg"],
   },
   {
     id: 5,
@@ -71,11 +71,25 @@ const products = [
       "Handmade bunting made from natural cotton fabrics. Perfect for parties or room decor, featuring a mix of colors and patterns.",
     category: "Home",
     price: 30,
-    images: [
-      "images/bunting-1.jpeg",
-      "images/bunting-2.jpeg",
-      "images/bunting-3.jpeg",
-    ],
+    images: ["images/bunting-1.jpeg"],
+  },
+  {
+    id: 7,
+    name: "Reversible Children’s Smock",
+    description:
+      "Reversible smock for children, made from durable cotton. Features a fun print on one side and a solid color on the other, perfect for art projects.",
+    category: "Clothing",
+    price: 45,
+    images: ["images/smock-1.jpeg"],
+  },
+  {
+    id: 8,
+    name: "Adult Embroidered Smock",
+    description:
+      "Elegant embroidered smock for adults, made from high-quality cotton. Features intricate embroidery and a comfortable fit, perfect for creative activities.",
+    category: "Clothing",
+    price: 65,
+    images: ["images/adult-smock-1.jpeg"],
   },
 ];
 
@@ -85,8 +99,8 @@ const siteConfig = {
   tagline: "Thoughtfully crafted for little ones",
   description:
     "Hand-sewn children's clothing and toys made from natural, sustainable materials.",
-  email: "hello@calendulachild.com",
-  instagram: "@calendulachild",
+  email: "calendulachild@gmail.com",
+  instagram: "@calendula_child",
 };
 
 // HTML template
@@ -165,11 +179,10 @@ const htmlTemplate = `<!DOCTYPE html>
             background: white;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 16px;
-            color: #2c2c2c;
+        .hero-logo {
+            max-height: 120px;
+            width: auto;
+            margin-bottom: 24px;
         }
 
         .hero p {
@@ -511,10 +524,6 @@ const htmlTemplate = `<!DOCTYPE html>
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            
             .hero p {
                 font-size: 16px;
             }
@@ -553,7 +562,9 @@ const htmlTemplate = `<!DOCTYPE html>
 
     <section class="hero">
         <div class="container">
-            <h1>${siteConfig.siteName}</h1>
+            <img src="images/logo.jpg" alt="${
+              siteConfig.siteName
+            }" class="hero-logo">
             <p>${siteConfig.description}</p>
         </div>
     </section>
@@ -567,14 +578,14 @@ const htmlTemplate = `<!DOCTYPE html>
         </div>
     </section>
 
-    <footer id="contact">
+    <footer >
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div id="about" class="footer-section">
                     <h3>About ${siteConfig.siteName}</h3>
                     <p>We create beautiful, sustainable children's clothing and toys using traditional techniques and natural materials. Each piece is carefully crafted by hand with attention to detail and built to last.</p>
                 </div>
-                <div class="footer-section">
+                <div id="contact" class="footer-section">
                     <h3>Get in Touch</h3>
                     <div class="contact-info">
                         <p>Email: <a href="mailto:${siteConfig.email}">${

@@ -73,11 +73,10 @@
             background: white;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 16px;
-            color: #2c2c2c;
+        .hero-logo {
+            max-height: 120px;
+            width: auto;
+            margin-bottom: 24px;
         }
 
         .hero p {
@@ -419,10 +418,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            
             .hero p {
                 font-size: 16px;
             }
@@ -461,7 +456,7 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Calendula Child</h1>
+            <img src="images/logo.jpg" alt="Calendula Child" class="hero-logo">
             <p>Hand-sewn children's clothing and toys made from natural, sustainable materials.</p>
         </div>
     </section>
@@ -501,27 +496,17 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="carousel-container" data-count="2">
+                    <div class="carousel-container" data-count="1">
                         <div class="carousel-track">
                             
                         <div class="carousel-slide" style="background-image: url('images/pants-1.jpeg');">
                         </div>
-                        <div class="carousel-slide" style="background-image: url('images/pants-2.jpeg');">
-                        </div>
-                        </div>
-                        
-                        <button class="carousel-nav prev">‹</button>
-                        <button class="carousel-nav next">›</button>
-                        <div class="carousel-indicators">
-                            
-                        <div class="carousel-dot active"></div>
-                        <div class="carousel-dot "></div>
                         </div>
                         
                     </div>
                     <div class="product-info">
                         <div class="product-category">Clothing</div>
-                        <h3 class="product-name">Grow-with-me Pants</h3>
+                        <h3 class="product-name">Grow-with-me Pantsn (6m-2y)</h3>
                         <p class="product-description">Organic cotton pants with adjustable cuffs. Designed to grow with your child, featuring a comfortable elastic waistband.</p>
                         <div class="product-price">$30</div>
                     </div>
@@ -559,21 +544,11 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="carousel-container" data-count="2">
+                    <div class="carousel-container" data-count="1">
                         <div class="carousel-track">
                             
                         <div class="carousel-slide" style="background-image: url('images/pouch-1.jpeg');">
                         </div>
-                        <div class="carousel-slide" style="background-image: url('images/pouch-2.jpeg');">
-                        </div>
-                        </div>
-                        
-                        <button class="carousel-nav prev">‹</button>
-                        <button class="carousel-nav next">›</button>
-                        <div class="carousel-indicators">
-                            
-                        <div class="carousel-dot active"></div>
-                        <div class="carousel-dot "></div>
                         </div>
                         
                     </div>
@@ -614,24 +589,11 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="carousel-container" data-count="3">
+                    <div class="carousel-container" data-count="1">
                         <div class="carousel-track">
                             
                         <div class="carousel-slide" style="background-image: url('images/bunting-1.jpeg');">
                         </div>
-                        <div class="carousel-slide" style="background-image: url('images/bunting-2.jpeg');">
-                        </div>
-                        <div class="carousel-slide" style="background-image: url('images/bunting-3.jpeg');">
-                        </div>
-                        </div>
-                        
-                        <button class="carousel-nav prev">‹</button>
-                        <button class="carousel-nav next">›</button>
-                        <div class="carousel-indicators">
-                            
-                        <div class="carousel-dot active"></div>
-                        <div class="carousel-dot "></div>
-                        <div class="carousel-dot "></div>
                         </div>
                         
                     </div>
@@ -642,22 +604,54 @@
                         <div class="product-price">$30</div>
                     </div>
                 </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/smock-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Reversible Children’s Smock</h3>
+                        <p class="product-description">Reversible smock for children, made from durable cotton. Features a fun print on one side and a solid color on the other, perfect for art projects.</p>
+                        <div class="product-price">$45</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/adult-smock-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Adult Embroidered Smock</h3>
+                        <p class="product-description">Elegant embroidered smock for adults, made from high-quality cotton. Features intricate embroidery and a comfortable fit, perfect for creative activities.</p>
+                        <div class="product-price">$65</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact">
+    <footer >
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div id="about" class="footer-section">
                     <h3>About Calendula Child</h3>
                     <p>We create beautiful, sustainable children's clothing and toys using traditional techniques and natural materials. Each piece is carefully crafted by hand with attention to detail and built to last.</p>
                 </div>
-                <div class="footer-section">
+                <div id="contact" class="footer-section">
                     <h3>Get in Touch</h3>
                     <div class="contact-info">
-                        <p>Email: <a href="mailto:hello@calendulachild.com">hello@calendulachild.com</a></p>
-                        <p>Instagram: <a href="https://instagram.com/calendulachild" target="_blank">@calendulachild</a></p>
+                        <p>Email: <a href="mailto:calendulachild@gmail.com">calendulachild@gmail.com</a></p>
+                        <p>Instagram: <a href="https://instagram.com/calendula_child" target="_blank">@calendula_child</a></p>
                         <p>Custom orders and inquiries welcome</p>
                     </div>
                 </div>
