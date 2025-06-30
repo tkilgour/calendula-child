@@ -328,12 +328,8 @@
 
         /* Mobile modal adjustments */
         @media (max-width: 768px) {
-            .modal-nav.prev {
-                left: -60px;
-            }
-            
-            .modal-nav.next {
-                right: -60px;
+            .modal-nav {
+                display: none;
             }
             
             .modal-close {
@@ -615,7 +611,7 @@
                     </div>
                     <div class="product-info">
                         <div class="product-category">Clothing</div>
-                        <h3 class="product-name">Reversible Children’s Smock</h3>
+                        <h3 class="product-name">Reversible Children's Smock</h3>
                         <p class="product-description">Reversible smock for children, made from durable cotton. Features a fun print on one side and a solid color on the other, perfect for art projects.</p>
                         <div class="product-price">$45</div>
                     </div>
@@ -736,6 +732,41 @@
                 if (e.key === 'ArrowRight') nextModalImage();
             }
         });
+
+        // Modal touch/swipe support
+        let modalStartX = 0;
+        let modalIsDragging = false;
+
+        function handleModalTouchStart(e) {
+            modalStartX = e.touches[0].clientX;
+            modalIsDragging = true;
+        }
+        function handleModalTouchMove(e) {
+            if (!modalIsDragging) return;
+            e.preventDefault();
+        }
+        function handleModalTouchEnd(e) {
+            if (!modalIsDragging) return;
+            const endX = e.changedTouches[0].clientX;
+            const diffX = modalStartX - endX;
+            if (Math.abs(diffX) > 50 && currentModalImages.length > 1) {
+                if (diffX > 0) {
+                    nextModalImage();
+                } else {
+                    prevModalImage();
+                }
+            }
+            modalIsDragging = false;
+        }
+
+        // Attach to both modal overlay and modal image
+        modal.addEventListener('touchstart', handleModalTouchStart);
+        modal.addEventListener('touchmove', handleModalTouchMove);
+        modal.addEventListener('touchend', handleModalTouchEnd);
+
+        modalImage.addEventListener('touchstart', handleModalTouchStart);
+        modalImage.addEventListener('touchmove', handleModalTouchMove);
+        modalImage.addEventListener('touchend', handleModalTouchEnd);
 
         // Initialize all carousels
         document.addEventListener('DOMContentLoaded', function() {
