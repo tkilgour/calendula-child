@@ -875,7 +875,7 @@ server.listen(PORT, () => {
   console.log("🌐 Development server: server.js");
   console.log("\nTo get started:");
   console.log("1. node generate-site.js  (regenerate site)");
-  console.log("2. node server.js         (start dev server)");
+  console.log("2. node server.js         (start server)");
   console.log("3. Open http://localhost:3000");
 }
 
