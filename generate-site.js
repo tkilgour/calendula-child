@@ -343,13 +343,14 @@ const htmlTemplate = `<!DOCTYPE html>
             max-width: 90vw;
             max-height: 90vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
         .modal-image {
             max-width: 100%;
-            max-height: 100%;
+            max-height: calc(90vh - 80px);
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -378,48 +379,37 @@ const htmlTemplate = `<!DOCTYPE html>
         }
 
         .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
+            background: none;
             border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: #2c2c2c;
-            transition: background 0.2s;
-            z-index: 10;
+            font-size: 18px;
+            color: white;
+            transition: color 0.2s;
+            padding: 8px;
+            border-radius: 4px;
         }
 
         .modal-nav:hover {
-            background: white;
-        }
-
-        .modal-nav.prev {
-            left: -70px;
-        }
-
-        .modal-nav.next {
-            right: -70px;
+            color: #ccc;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .modal-info {
-            position: absolute;
-            bottom: -60px;
-            left: 0;
-            right: 0;
-            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
             color: white;
         }
 
         .modal-counter {
             font-size: 14px;
             opacity: 0.8;
+            min-width: 60px;
+            text-align: center;
         }
 
         /* Hide modal navigation for single images */
@@ -441,6 +431,15 @@ const htmlTemplate = `<!DOCTYPE html>
             .modal-close {
                 top: -40px;
                 right: 0;
+            }
+            
+            .modal-info {
+                gap: 12px;
+            }
+            
+            .modal-nav {
+                font-size: 16px;
+                padding: 6px;
             }
         }
 
@@ -606,11 +605,11 @@ const htmlTemplate = `<!DOCTYPE html>
     <div class="modal-overlay" id="imageModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <button class="modal-nav prev" id="modalPrev">‹</button>
-            <button class="modal-nav next" id="modalNext">›</button>
             <img class="modal-image" id="modalImage" src="" alt="">
             <div class="modal-info">
+                <button class="modal-nav prev" id="modalPrev">‹</button>
                 <div class="modal-counter" id="modalCounter"></div>
+                <button class="modal-nav next" id="modalNext">›</button>
             </div>
         </div>
     </div>
