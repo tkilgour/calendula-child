@@ -1,926 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendula Child - Thoughtfully crafted for little ones</title>
-    <meta
-      name="description"
-      content="Hand-sewn children's clothing and toys made from natural, sustainable materials."
-    />
-
+    <meta name="description" content="Hand-sewn children's clothing and toys made from natural, sustainable materials.">
+    
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
-        line-height: 1.6;
-        color: #2c2c2c;
-        background: #fafafa;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      /* Header */
-      header {
-        background: white;
-        border-bottom: 1px solid #e5e5e5;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 0;
-      }
-
-      .logo {
-        font-size: 24px;
-        font-weight: 600;
-        color: #2c2c2c;
-        text-decoration: none;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 32px;
-        list-style: none;
-      }
-
-      .nav-links a {
-        color: #666;
-        text-decoration: none;
-        font-weight: 400;
-        transition: color 0.2s;
-      }
-
-      .nav-links a:hover {
-        color: #2c2c2c;
-      }
-
-      /* Hero Section */
-      .hero {
-        text-align: center;
-        padding: 80px 0 60px;
-        background: white;
-      }
-
-      .hero-logo {
-        max-height: 120px;
-        width: auto;
-        margin-bottom: 24px;
-      }
-
-      .hero p {
-        font-size: 18px;
-        color: #666;
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      /* Products Section */
-      .products-section {
-        padding: 60px 0 80px;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 32px;
-        font-weight: 300;
-        margin-bottom: 48px;
-        color: #2c2c2c;
-      }
-
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 40px;
-      }
-
-      .product-card {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        transition: transform 0.2s, box-shadow 0.2s;
-        border: 1px solid #e5e5e5;
-      }
-
-      .product-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Carousel Styles */
-      .carousel-container {
-        position: relative;
-        width: 100%;
-        height: 280px;
-        overflow: hidden;
-      }
-
-      .carousel-track {
-        display: flex;
-        transition: transform 0.3s ease;
-        height: 100%;
-      }
-
-      .carousel-slide {
-        min-width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        background-color: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #999;
-        font-size: 14px;
-      }
-
-      .carousel-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.9);
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        color: #2c2c2c;
-        opacity: 0;
-        transition: opacity 0.2s;
-        z-index: 10;
-      }
-
-      .carousel-nav:hover {
-        background: rgba(255, 255, 255, 1);
-      }
-
-      .carousel-nav.prev {
-        left: 12px;
-      }
-
-      .carousel-nav.next {
-        right: 12px;
-      }
-
-      .carousel-container:hover .carousel-nav {
-        opacity: 1;
-      }
-
-      .carousel-indicators {
-        position: absolute;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 6px;
-        z-index: 10;
-      }
-
-      .carousel-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-
-      .carousel-dot.active {
-        background: white;
-      }
-
-      /* Hide navigation for single images */
-      .carousel-container[data-count="1"] .carousel-nav,
-      .carousel-container[data-count="1"] .carousel-indicators {
-        display: none;
-      }
-
-      /* Modal Styles */
-      .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s, visibility 0.3s;
-      }
-
-      .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .modal-content {
-        position: relative;
-        max-width: 90vw;
-        max-height: 90vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .modal-image {
-        max-width: 100%;
-        max-height: calc(90vh - 80px);
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      }
-
-      .modal-close {
-        position: absolute;
-        top: -50px;
-        right: -10px;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 32px;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background 0.2s;
-      }
-
-      .modal-close:hover {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .modal-nav {
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: white;
-        transition: color 0.2s;
-        padding: 8px;
-        border-radius: 4px;
-      }
-
-      .modal-nav:hover {
-        color: #ccc;
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .modal-info {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        color: white;
-      }
-
-      .modal-counter {
-        font-size: 14px;
-        opacity: 0.8;
-        min-width: 60px;
-        text-align: center;
-      }
-
-      /* Hide modal navigation for single images */
-      .modal-overlay[data-count="1"] .modal-nav {
-        display: none;
-      }
-
-      /* Clickable cursor for carousel slides */
-      .carousel-slide {
-        cursor: pointer;
-      }
-
-      /* Mobile modal adjustments */
-      @media (max-width: 768px) {
-        .modal-nav {
-          display: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .modal-close {
-          top: -40px;
-          right: 0;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: #fafafa;
         }
 
-        .modal-info {
-          gap: 12px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .modal-nav {
-          font-size: 16px;
-          padding: 6px;
-        }
-      }
-
-      .product-info {
-        padding: 24px;
-      }
-
-      .product-category {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #999;
-        margin-bottom: 8px;
-      }
-
-      .product-name {
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 12px;
-        color: #2c2c2c;
-      }
-
-      .product-description {
-        font-size: 14px;
-        color: #666;
-        line-height: 1.5;
-        margin-bottom: 16px;
-      }
-
-      .product-price {
-        font-size: 16px;
-        font-weight: 500;
-        color: #2c2c2c;
-      }
-
-      /* Footer */
-      footer {
-        background: #2c2c2c;
-        color: white;
-        padding: 60px 0 40px;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 48px;
-        margin-bottom: 40px;
-      }
-
-      .footer-section h3 {
-        font-size: 18px;
-        font-weight: 500;
-        margin-bottom: 16px;
-      }
-
-      .footer-section p {
-        color: #ccc;
-        line-height: 1.6;
-      }
-
-      .contact-info {
-        color: #ccc;
-      }
-
-      .contact-info a {
-        color: white;
-        text-decoration: none;
-      }
-
-      .footer-bottom {
-        border-top: 1px solid #444;
-        padding-top: 24px;
-        text-align: center;
-        color: #999;
-        font-size: 14px;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero p {
-          font-size: 16px;
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .products-grid {
-          grid-template-columns: 1fr;
-          gap: 24px;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
         }
 
-        .footer-content {
-          grid-template-columns: 1fr;
-          gap: 32px;
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c2c2c;
+            text-decoration: none;
         }
 
         .nav-links {
-          display: none;
+            display: flex;
+            gap: 32px;
+            list-style: none;
         }
-      }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2c2c2c;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: white;
+        }
+
+        .hero-logo {
+            max-height: 120px;
+            width: auto;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 60px 0 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 48px;
+            color: #2c2c2c;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e5e5e5;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #2c2c2c;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .carousel-nav.prev {
+            left: 12px;
+        }
+
+        .carousel-nav.next {
+            right: 12px;
+        }
+
+        .carousel-container:hover .carousel-nav {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+        }
+
+        /* Hide navigation for single images */
+        .carousel-container[data-count="1"] .carousel-nav,
+        .carousel-container[data-count="1"] .carousel-indicators {
+            display: none;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: -10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-nav {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            transition: color 0.2s;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .modal-nav:hover {
+            color: #ccc;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-info {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: white;
+        }
+
+        .modal-counter {
+            font-size: 14px;
+            opacity: 0.8;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Hide modal navigation for single images */
+        .modal-overlay[data-count="1"] .modal-nav {
+            display: none;
+        }
+
+        /* Clickable cursor for carousel slides */
+        .carousel-slide {
+            cursor: pointer;
+        }
+
+        /* Mobile modal adjustments */
+        @media (max-width: 768px) {
+            .modal-close {
+                top: -40px;
+                right: 0;
+            }
+            
+            .modal-info {
+                gap: 12px;
+            }
+            
+            .modal-nav {
+                font-size: 16px;
+                padding: 6px;
+            }
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2c2c2c;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c2c2c;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c2c;
+            color: white;
+            padding: 60px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .footer-section p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            color: #ccc;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 24px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <div class="container">
-        <div class="header-content">
-          <a href="#" class="logo">Calendula Child</a>
-          <nav>
-            <ul class="nav-links">
-              <li><a href="#products">Products</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Calendula Child</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-      </div>
     </header>
 
     <section class="hero">
-      <div class="container">
-        <img src="images/logo.jpg" alt="Calendula Child" class="hero-logo" />
-        <p>
-          Hand-sewn children's clothing and toys made from natural, sustainable
-          materials.
-        </p>
-      </div>
+        <div class="container">
+            <img src="images/logo.jpg" alt="Calendula Child" class="hero-logo">
+            <p>Hand-sewn children's clothing and toys made from natural, sustainable materials.</p>
+        </div>
     </section>
 
     <section id="products" class="products-section">
-      <div class="container">
-        <h2 class="section-title">Our Collection</h2>
-        <div class="products-grid">
-          <div class="product-card">
-            <div class="carousel-container" data-count="3">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/crown-1.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/crown-2.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/crown-3.jpeg')"
-                ></div>
-              </div>
-
-              <button class="carousel-nav prev">‹</button>
-              <button class="carousel-nav next">›</button>
-              <div class="carousel-indicators">
-                <div class="carousel-dot active"></div>
-                <div class="carousel-dot"></div>
-                <div class="carousel-dot"></div>
-              </div>
+        <div class="container">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="carousel-container" data-count="3">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/crown-1.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/crown-2.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/crown-3.jpeg');">
+                        </div>
+                        </div>
+                        
+                        <button class="carousel-nav prev">‹</button>
+                        <button class="carousel-nav next">›</button>
+                        <div class="carousel-indicators">
+                            
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot "></div>
+                        <div class="carousel-dot "></div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Quilted Celebration Crown</h3>
+                        <p class="product-description">Handmade crown in soft cotton with quilted details. Features adjustable snaps for a perfect fit.</p>
+                        <div class="product-price">$35</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/pants-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Grow-with-me Pantsn (6m-2y)</h3>
+                        <p class="product-description">Organic cotton pants with adjustable cuffs. Designed to grow with your child, featuring a comfortable elastic waistband.</p>
+                        <div class="product-price">$30</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="4">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/doll-1.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/doll-2.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/doll-3.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/doll-4.jpeg');">
+                        </div>
+                        </div>
+                        
+                        <button class="carousel-nav prev">‹</button>
+                        <button class="carousel-nav next">›</button>
+                        <div class="carousel-indicators">
+                            
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot "></div>
+                        <div class="carousel-dot "></div>
+                        <div class="carousel-dot "></div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Toys</div>
+                        <h3 class="product-name">Inner Child Dolls</h3>
+                        <p class="product-description">Handmade dolls crafted from natural fibers. Each doll is unique, with hand-stitched details and soft, safe materials.</p>
+                        <div class="product-price">$65</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/pouch-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Toys</div>
+                        <h3 class="product-name">Doll Sleep Pouch</h3>
+                        <p class="product-description">Soft sleep pouch for dolls, made from organic cotton. Features a carrying strap and a cozy interior.</p>
+                        <div class="product-price">$20</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="3">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/wings-1.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/wings-2.jpeg');">
+                        </div>
+                        <div class="carousel-slide" style="background-image: url('images/wings-3.jpeg');">
+                        </div>
+                        </div>
+                        
+                        <button class="carousel-nav prev">‹</button>
+                        <button class="carousel-nav next">›</button>
+                        <div class="carousel-indicators">
+                            
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot "></div>
+                        <div class="carousel-dot "></div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Toys</div>
+                        <h3 class="product-name">Quilted Play Wings</h3>
+                        <p class="product-description">Quilted wings for imaginative play, made from soft cotton. Features adjustable straps and a lightweight design.</p>
+                        <div class="product-price">$100</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/bunting-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Home</div>
+                        <h3 class="product-name">Celebration Bunting</h3>
+                        <p class="product-description">Handmade bunting made from natural cotton fabrics. Perfect for parties or room decor, featuring a mix of colors and patterns.</p>
+                        <div class="product-price">$30</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/smock-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Reversible Children's Smock</h3>
+                        <p class="product-description">Reversible smock for children, made from durable cotton. Features a fun print on one side and a solid color on the other, perfect for art projects.</p>
+                        <div class="product-price">$45</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="carousel-container" data-count="1">
+                        <div class="carousel-track">
+                            
+                        <div class="carousel-slide" style="background-image: url('images/adult-smock-1.jpeg');">
+                        </div>
+                        </div>
+                        
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Clothing</div>
+                        <h3 class="product-name">Adult Embroidered Smock</h3>
+                        <p class="product-description">Elegant embroidered smock for adults, made from high-quality cotton. Features intricate embroidery and a comfortable fit, perfect for creative activities.</p>
+                        <div class="product-price">$65</div>
+                    </div>
+                </div>
             </div>
-            <div class="product-info">
-              <div class="product-category">Clothing</div>
-              <h3 class="product-name">Quilted Celebration Crown</h3>
-              <p class="product-description">
-                Handmade crown in soft cotton with quilted details. Features
-                adjustable snaps for a perfect fit.
-              </p>
-              <div class="product-price">$35</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="1">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/pants-1.jpeg')"
-                ></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Clothing</div>
-              <h3 class="product-name">Grow-with-me Pantsn (6m-2y)</h3>
-              <p class="product-description">
-                Organic cotton pants with adjustable cuffs. Designed to grow
-                with your child, featuring a comfortable elastic waistband.
-              </p>
-              <div class="product-price">$30</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="4">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/doll-1.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/doll-2.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/doll-3.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/doll-4.jpeg')"
-                ></div>
-              </div>
-
-              <button class="carousel-nav prev">‹</button>
-              <button class="carousel-nav next">›</button>
-              <div class="carousel-indicators">
-                <div class="carousel-dot active"></div>
-                <div class="carousel-dot"></div>
-                <div class="carousel-dot"></div>
-                <div class="carousel-dot"></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Toys</div>
-              <h3 class="product-name">Inner Child Dolls</h3>
-              <p class="product-description">
-                Handmade dolls crafted from natural fibers. Each doll is unique,
-                with hand-stitched details and soft, safe materials.
-              </p>
-              <div class="product-price">$65</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="1">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/pouch-1.jpeg')"
-                ></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Toys</div>
-              <h3 class="product-name">Doll Sleep Pouch</h3>
-              <p class="product-description">
-                Soft sleep pouch for dolls, made from organic cotton. Features a
-                carrying strap and a cozy interior.
-              </p>
-              <div class="product-price">$20</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="3">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/wings-1.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/wings-2.jpeg')"
-                ></div>
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/wings-3.jpeg')"
-                ></div>
-              </div>
-
-              <button class="carousel-nav prev">‹</button>
-              <button class="carousel-nav next">›</button>
-              <div class="carousel-indicators">
-                <div class="carousel-dot active"></div>
-                <div class="carousel-dot"></div>
-                <div class="carousel-dot"></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Toys</div>
-              <h3 class="product-name">Quilted Play Wings</h3>
-              <p class="product-description">
-                Quilted wings for imaginative play, made from soft cotton.
-                Features adjustable straps and a lightweight design.
-              </p>
-              <div class="product-price">$100</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="1">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/bunting-1.jpeg')"
-                ></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Home</div>
-              <h3 class="product-name">Celebration Bunting</h3>
-              <p class="product-description">
-                Handmade bunting made from natural cotton fabrics. Perfect for
-                parties or room decor, featuring a mix of colors and patterns.
-              </p>
-              <div class="product-price">$30</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="1">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/smock-1.jpeg')"
-                ></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Clothing</div>
-              <h3 class="product-name">Reversible Children's Smock</h3>
-              <p class="product-description">
-                Reversible smock for children, made from durable cotton.
-                Features a fun print on one side and a solid color on the other,
-                perfect for art projects.
-              </p>
-              <div class="product-price">$45</div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="carousel-container" data-count="1">
-              <div class="carousel-track">
-                <div
-                  class="carousel-slide"
-                  style="background-image: url('images/adult-smock-1.jpeg')"
-                ></div>
-              </div>
-            </div>
-            <div class="product-info">
-              <div class="product-category">Clothing</div>
-              <h3 class="product-name">Adult Embroidered Smock</h3>
-              <p class="product-description">
-                Elegant embroidered smock for adults, made from high-quality
-                cotton. Features intricate embroidery and a comfortable fit,
-                perfect for creative activities.
-              </p>
-              <div class="product-price">$65</div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div id="about" class="footer-section">
-            <h3>About Calendula Child</h3>
-            <p>
-              We create beautiful, sustainable children's clothing and toys
-              using traditional techniques and natural materials. Each piece is
-              carefully crafted by hand with attention to detail and built to
-              last.
-            </p>
-          </div>
-          <div id="contact" class="footer-section">
-            <h3>Get in Touch</h3>
-            <div class="contact-info">
-              <p>
-                Email:
-                <a href="mailto:calendulachild@gmail.com"
-                  >calendulachild@gmail.com</a
-                >
-              </p>
-              <p>
-                Instagram:
-                <a href="https://instagram.com/calendula_child" target="_blank"
-                  >@calendula_child</a
-                >
-              </p>
-              <p>Custom orders and inquiries welcome</p>
+    <footer >
+        <div class="container">
+            <div class="footer-content">
+                <div id="about" class="footer-section">
+                    <h3>About Calendula Child</h3>
+                    <p>We create beautiful, sustainable children's clothing and toys using traditional techniques and natural materials. Each piece is carefully crafted by hand with attention to detail and built to last.</p>
+                </div>
+                <div id="contact" class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-info">
+                        <p>Email: <a href="mailto:calendulachild@gmail.com">calendulachild@gmail.com</a></p>
+                        <p>Instagram: <a href="https://instagram.com/calendula_child" target="_blank">@calendula_child</a></p>
+                        <p>Custom orders and inquiries welcome</p>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Calendula Child. Handcrafted with care.</p>
+            </div>
         </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 Calendula Child. Handcrafted with care.</p>
-        </div>
-      </div>
     </footer>
 
     <!-- Modal for full-size images -->
     <div class="modal-overlay" id="imageModal">
-      <div class="modal-content">
-        <button class="modal-close" id="modalClose">&times;</button>
-        <img class="modal-image" id="modalImage" src="" alt="" />
-        <div class="modal-info">
-          <button class="modal-nav prev" id="modalPrev">‹</button>
-          <div class="modal-counter" id="modalCounter"></div>
-          <button class="modal-nav next" id="modalNext">›</button>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <button class="modal-nav prev" id="modalPrev">‹</button>
+                <div class="modal-counter" id="modalCounter"></div>
+                <button class="modal-nav next" id="modalNext">›</button>
+            </div>
         </div>
-      </div>
     </div>
 
     <script>
-      // Modal functionality
-      const modal = document.getElementById("imageModal");
-      const modalImage = document.getElementById("modalImage");
-      const modalClose = document.getElementById("modalClose");
-      const modalPrev = document.getElementById("modalPrev");
-      const modalNext = document.getElementById("modalNext");
-      const modalCounter = document.getElementById("modalCounter");
-
-      let currentModalImages = [];
-      let currentModalIndex = 0;
-
-      function openModal(images, index) {
-        currentModalImages = images;
-        currentModalIndex = index;
-        updateModalImage();
-        modal.setAttribute("data-count", images.length);
-        modal.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeModal() {
-        modal.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-
-      function updateModalImage() {
-        modalImage.src = currentModalImages[currentModalIndex];
-        modalCounter.textContent = `${currentModalIndex + 1} of ${
-          currentModalImages.length
-        }`;
-      }
-
-      function nextModalImage() {
-        currentModalIndex = (currentModalIndex + 1) % currentModalImages.length;
-        updateModalImage();
-      }
-
-      function prevModalImage() {
-        currentModalIndex =
-          (currentModalIndex - 1 + currentModalImages.length) %
-          currentModalImages.length;
-        updateModalImage();
-      }
-
-      // Modal event listeners
-      modalClose.addEventListener("click", closeModal);
-      modalNext.addEventListener("click", nextModalImage);
-      modalPrev.addEventListener("click", prevModalImage);
-
-      // Close modal when clicking overlay
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
-
-      // Close modal with escape key
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal.classList.contains("active")) {
-          closeModal();
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const modalPrev = document.getElementById('modalPrev');
+        const modalNext = document.getElementById('modalNext');
+        const modalCounter = document.getElementById('modalCounter');
+        
+        let currentModalImages = [];
+        let currentModalIndex = 0;
+        
+        function openModal(images, index) {
+            currentModalImages = images;
+            currentModalIndex = index;
+            updateModalImage();
+            modal.setAttribute('data-count', images.length);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        if (modal.classList.contains("active")) {
-          if (e.key === "ArrowLeft") prevModalImage();
-          if (e.key === "ArrowRight") nextModalImage();
+        
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
         }
-      });
-
-      // Modal touch/swipe support
-      let modalStartX = 0;
-      let modalIsDragging = false;
-
-      function handleModalTouchStart(e) {
-        modalStartX = e.touches[0].clientX;
-        modalIsDragging = true;
-      }
-      function handleModalTouchMove(e) {
-        if (!modalIsDragging) return;
-        e.preventDefault();
-      }
-      function handleModalTouchEnd(e) {
-        if (!modalIsDragging) return;
-        const endX = e.changedTouches[0].clientX;
-        const diffX = modalStartX - endX;
-        if (Math.abs(diffX) > 50 && currentModalImages.length > 1) {
-          if (diffX > 0) {
-            nextModalImage();
-          } else {
-            prevModalImage();
-          }
+        
+        function updateModalImage() {
+            modalImage.src = currentModalImages[currentModalIndex];
+            modalCounter.textContent = `${currentModalIndex + 1} of ${currentModalImages.length}`;
         }
-        modalIsDragging = false;
-      }
-
-      // Attach to both modal overlay and modal image
-      modal.addEventListener("touchstart", handleModalTouchStart);
-      modal.addEventListener("touchmove", handleModalTouchMove);
-      modal.addEventListener("touchend", handleModalTouchEnd);
-
-      modalImage.addEventListener("touchstart", handleModalTouchStart);
-      modalImage.addEventListener("touchmove", handleModalTouchMove);
-      modalImage.addEventListener("touchend", handleModalTouchEnd);
-
-      // Initialize all carousels
-      document.addEventListener("DOMContentLoaded", function () {
-        const carousels = document.querySelectorAll(".carousel-container");
-
-        carousels.forEach((carousel) => {
-          const track = carousel.querySelector(".carousel-track");
-          const slides = carousel.querySelectorAll(".carousel-slide");
-          const prevBtn = carousel.querySelector(".carousel-nav.prev");
-          const nextBtn = carousel.querySelector(".carousel-nav.next");
-          const dots = carousel.querySelectorAll(".carousel-dot");
-
-          // Get all images for this carousel
-          const carouselImages = Array.from(slides).map((slide) => {
-            const bgImage = slide.style.backgroundImage;
-            return bgImage.slice(5, -2); // Remove 'url("' and '")'
-          });
-
-          let currentIndex = 0;
-
-          function updateCarousel() {
-            const translateX = -currentIndex * 100;
-            track.style.transform = `translateX(${translateX}%)`;
-
-            // Update dots
-            dots.forEach((dot, index) => {
-              dot.classList.toggle("active", index === currentIndex);
-            });
-          }
-
-          function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateCarousel();
-          }
-
-          function prevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateCarousel();
-          }
-
-          // Event listeners
-          if (nextBtn) nextBtn.addEventListener("click", nextSlide);
-          if (prevBtn) prevBtn.addEventListener("click", prevSlide);
-
-          dots.forEach((dot, index) => {
-            dot.addEventListener("click", () => {
-              currentIndex = index;
-              updateCarousel();
-            });
-          });
-
-          // Add click listeners to slides for modal
-          slides.forEach((slide, index) => {
-            slide.addEventListener("click", () => {
-              openModal(carouselImages, index);
-            });
-          });
-
-          // Touch/swipe support
-          let startX = 0;
-          let isDragging = false;
-
-          carousel.addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-          });
-
-          carousel.addEventListener("touchmove", (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-          });
-
-          carousel.addEventListener("touchend", (e) => {
-            if (!isDragging) return;
-
-            const endX = e.changedTouches[0].clientX;
-            const diffX = startX - endX;
-
-            if (Math.abs(diffX) > 50) {
-              if (diffX > 0) {
-                nextSlide();
-              } else {
-                prevSlide();
-              }
-            }
-
-            isDragging = false;
-          });
-
-          // Initialize
-          updateCarousel();
+        
+        function nextModalImage() {
+            currentModalIndex = (currentModalIndex + 1) % currentModalImages.length;
+            updateModalImage();
+        }
+        
+        function prevModalImage() {
+            currentModalIndex = (currentModalIndex - 1 + currentModalImages.length) % currentModalImages.length;
+            updateModalImage();
+        }
+        
+        // Modal event listeners
+        modalClose.addEventListener('click', closeModal);
+        modalNext.addEventListener('click', nextModalImage);
+        modalPrev.addEventListener('click', prevModalImage);
+        
+        // Close modal when clicking overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
-      });
+        
+        // Close modal with escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') prevModalImage();
+                if (e.key === 'ArrowRight') nextModalImage();
+            }
+        });
+
+        // Initialize all carousels
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousels = document.querySelectorAll('.carousel-container');
+            
+            carousels.forEach(carousel => {
+                const track = carousel.querySelector('.carousel-track');
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                const prevBtn = carousel.querySelector('.carousel-nav.prev');
+                const nextBtn = carousel.querySelector('.carousel-nav.next');
+                const dots = carousel.querySelectorAll('.carousel-dot');
+                
+                // Get all images for this carousel
+                const carouselImages = Array.from(slides).map(slide => {
+                    const bgImage = slide.style.backgroundImage;
+                    return bgImage.slice(5, -2); // Remove 'url("' and '")'
+                });
+                
+                let currentIndex = 0;
+                
+                function updateCarousel() {
+                    const translateX = -currentIndex * 100;
+                    track.style.transform = `translateX(${translateX}%)`;
+                    
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    updateCarousel();
+                }
+                
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                    updateCarousel();
+                }
+                
+                // Event listeners
+                if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+                if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+                
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
+                });
+                
+                // Add click listeners to slides for modal
+                slides.forEach((slide, index) => {
+                    slide.addEventListener('click', () => {
+                        openModal(carouselImages, index);
+                    });
+                });
+                
+                // Touch/swipe support
+                let startX = 0;
+                let isDragging = false;
+                
+                carousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+                
+                carousel.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                });
+                
+                carousel.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            nextSlide();
+                        } else {
+                            prevSlide();
+                        }
+                    }
+                    
+                    isDragging = false;
+                });
+                
+                // Initialize
+                updateCarousel();
+            });
+        });
     </script>
-  </body>
+</body>
 </html>

@@ -424,10 +424,6 @@ const htmlTemplate = `<!DOCTYPE html>
 
         /* Mobile modal adjustments */
         @media (max-width: 768px) {
-            .modal-nav {
-                display: none;
-            }
-            
             .modal-close {
                 top: -40px;
                 right: 0;
@@ -675,41 +671,6 @@ const htmlTemplate = `<!DOCTYPE html>
                 if (e.key === 'ArrowRight') nextModalImage();
             }
         });
-
-        // Modal touch/swipe support
-        let modalStartX = 0;
-        let modalIsDragging = false;
-
-        function handleModalTouchStart(e) {
-            modalStartX = e.touches[0].clientX;
-            modalIsDragging = true;
-        }
-        function handleModalTouchMove(e) {
-            if (!modalIsDragging) return;
-            e.preventDefault();
-        }
-        function handleModalTouchEnd(e) {
-            if (!modalIsDragging) return;
-            const endX = e.changedTouches[0].clientX;
-            const diffX = modalStartX - endX;
-            if (Math.abs(diffX) > 50 && currentModalImages.length > 1) {
-                if (diffX > 0) {
-                    nextModalImage();
-                } else {
-                    prevModalImage();
-                }
-            }
-            modalIsDragging = false;
-        }
-
-        // Attach to both modal overlay and modal image
-        modal.addEventListener('touchstart', handleModalTouchStart);
-        modal.addEventListener('touchmove', handleModalTouchMove);
-        modal.addEventListener('touchend', handleModalTouchEnd);
-
-        modalImage.addEventListener('touchstart', handleModalTouchStart);
-        modalImage.addEventListener('touchmove', handleModalTouchMove);
-        modalImage.addEventListener('touchend', handleModalTouchEnd);
 
         // Initialize all carousels
         document.addEventListener('DOMContentLoaded', function() {
